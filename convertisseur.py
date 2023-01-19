@@ -66,6 +66,17 @@ def suppr_historique():
         element.destroy()
 
 
+def sauve_historique():
+
+    f = open("historique.txt", "a")
+    f.write(f"")
+    
+    for element in hist.winfo_children():
+        f.write(f"{element['text']}\n")
+    
+    f.close()
+
+
 # Menu de conversion
 
 conv_main = Frame(fenetre, pady=10)
@@ -115,11 +126,13 @@ btn_ajout = Button(ajt_devise, text="Ajouter", command=Ajout_Devise, width= 25).
 conv_hist = Frame(fenetre, pady=10)
 conv_hist.pack(anchor="center")
 
-hist_titre = Label(conv_hist, text="Historique", font=(16)).pack(pady=10)
+hist_titre = Label(conv_hist, text="Historique", font=(16)).grid(row=0, columnspan=2)
 btn_vide_hist = Button(conv_hist, text="Vider l'historique", command= suppr_historique)
-btn_vide_hist.pack(fill="both", expand="yes")
+btn_vide_hist.grid(row=1, column=0)
+btn_sauvegarde_hist = Button(conv_hist, text="Sauvegarde", command= sauve_historique)
+btn_sauvegarde_hist.grid(row=1, column=1)
 hist = Frame(conv_hist)
-hist.pack(fill="both", expand="yes")
+hist.grid(row=2, columnspan=2)
 
 
 fenetre.mainloop()
